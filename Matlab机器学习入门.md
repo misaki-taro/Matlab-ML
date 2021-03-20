@@ -177,3 +177,70 @@ gscatter:
 confusion matrix
 
 ![img](https://gblobscdn.gitbook.com/assets%2F-MW9qnt5mI5Jcz-Mufx8%2F-MWCcUfTaZBSjR9wy8iS%2F-MWCtRXvpMNJlwu5WvzX%2Fimage.png?alt=media&token=2560f014-f3eb-4d84-9eee-c125bff3b338)
+
+
+
+## 3.Importing and Preprocessing Data
+
+### 3.2、Creating Datastores
+
+用到了三个matlab函式
+
+- letterds = datastore("file")
+- data = read(letterds)
+- data = readall(letterds)
+
+```matlab
+%读取xxxx_M_xxxx.txt的文件
+letterds = datastore("*_M_*.txt");
+
+%读取letterds的第一个文件
+data = read(letterds);
+
+%读取letterds的第二个文件
+data = read(letterds);
+
+%读取letterds的所有文件
+data = readall(letterds);
+```
+
+
+
+### 3.3、Adding a Data Transformation
+
+在**读datastore**之前先将其**transformation**
+
+- 例如normalization
+
+```matlab
+%load files to datastore
+letters = datastore("*_M_*.txt");
+
+preprocd = transform(letters, @scale);
+%注意这个function 要在transform后面
+function data = scale(data)
+	data.Time = (data.Time - data.Time(1))/1000;
+    data.X = 1.5*data.X;
+    %omitnan表示计算mean时ignore掉NAN
+    data.X = data.X - mean(data.X,"omitnan");
+    data.Y = data.Y - mean(data.Y,"omitnan");
+end
+```
+
+### supplement
+
+normalization:
+
+- [0~1] 
+- [-1~1]
+
+![img](https://gblobscdn.gitbook.com/assets%2F-MW9qnt5mI5Jcz-Mufx8%2F-MWDehM9Xj2oB6UNOBD5%2F-MWDeitCbxtNHMFzNIP3%2Fimage.png?alt=media&token=b5ec8e94-f83d-4adb-bb76-c0b224d7d49d)
+
+
+
+## 4.Engineering Features(工程特征)
+
+### 4.1、Types of Signals
+
+### 4.2、Calculating Summary Statistics
+
