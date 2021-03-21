@@ -321,3 +321,44 @@ normalization:
 
 
 ## 4.5、Calculating Correlations
+
+用到matlab的函式：
+
+- corr(X,Y)	--->求X,Y的相关系数
+
+  ![img](https://gblobscdn.gitbook.com/assets%2F-MW9qnt5mI5Jcz-Mufx8%2F-MWKYl80ly6gFWv6ZqaI%2F-MWKYo6dpkE5VTxAryd-%2Fimage.png?alt=media&token=4b82c09f-1ab5-4463-9f1b-de539afc5c58)
+
+- 衡量X,Y之间的**线性**相关度
+
+![image-20210322001408361](C:%5CUsers%5Chasee%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210322001408361.png)
+
+计算X和Y的相关系数，得出NAN，是因为有MISSING DATA
+
+
+
+接下来用...来去掉missing data
+
+```matlab
+corr(x,y,"Rows","complete")
+```
+
+在本例中v2.X和v2.Y为22*1的列向量
+
+![img](https://gblobscdn.gitbook.com/assets%2F-MW9qnt5mI5Jcz-Mufx8%2F-MWKYl80ly6gFWv6ZqaI%2F-MWKZh7CvU3wMO_FF7cC%2Fimage.png?alt=media&token=7d234232-88d6-4ee9-be66-980e3ba78126)
+
+```matlab
+M = [v2.X(1:11),v2.Y(1:11),v2.X(12:22),v2.Y(12:22)];
+```
+
+![img](https://gblobscdn.gitbook.com/assets%2F-MW9qnt5mI5Jcz-Mufx8%2F-MWKYl80ly6gFWv6ZqaI%2F-MWKZvebxQFLhM2VQREY%2Fimage.png?alt=media&token=8c2c5ee3-59be-4fc7-908d-402666861877)
+
+```matlab
+Cmat = corr(M,"Rows","complete");
+```
+
+Cmat:
+
+![img](https://gblobscdn.gitbook.com/assets%2F-MW9qnt5mI5Jcz-Mufx8%2F-MWKYl80ly6gFWv6ZqaI%2F-MWK_50r_GwRmUJPrrJz%2Fimage.png?alt=media&token=8c8102dd-f485-4119-b463-f349c909fc58)
+
+- Cmat(i,j)表示第i列和第j列的相关系数
+- 可以看到Cmat是对称矩阵
