@@ -244,3 +244,80 @@ normalization:
 
 ### 4.2、Calculating Summary Statistics
 
+#### Statistical Functions
+
+#### Measures of Central Tendency
+
+|                           Function                           |               Description               |
+| :----------------------------------------------------------: | :-------------------------------------: |
+| [`mean`](https://www.mathworks.com/help/matlab/ref/mean.html) |             Arithmetic mean             |
+| [`median`](https://www.mathworks.com/help/matlab/ref/median.html) |          Median (middle) value          |
+| [`mode`](https://www.mathworks.com/help/matlab/ref/mode.html) |           Most frequent value           |
+| [`trimmean`](https://www.mathworks.com/help/stats/trimmean.html) | Trimmed mean (mean, excluding outliers) |
+| [`geomean`](https://www.mathworks.com/help/stats/geomean.html) |             Geometric mean              |
+| [`harmean`](https://www.mathworks.com/help/stats/harmmean.html) |              Harmonic mean              |
+
+ 
+
+#### Measures of Spread
+
+|                           Function                           |                         Description                         |
+| :----------------------------------------------------------: | :---------------------------------------------------------: |
+|  [`range`](https://www.mathworks.com/help/stats/range.html)  |            Range of values (largest – smallest)             |
+| [`std`](https://www.mathworks.com/help/matlab/ref/std.html)  |                     Standard deviation                      |
+| [`var`](https://www.mathworks.com/help/matlab/ref/var.html)  |                          Variance                           |
+|    [`mad`](https://www.mathworks.com/help/stats/mad.html)    |                   Mean absolute deviation                   |
+| [`iqr`](https://www.mathworks.com/help/stats/prob.normaldistribution.iqr.html) | Interquartile range (75th percentile minus 25th percentile) |
+
+ 
+
+#### Measures of Shape
+
+|                           Function                           |            Description            |
+| :----------------------------------------------------------: | :-------------------------------: |
+| [`skewness`](https://www.mathworks.com/help/stats/skewness.html) |  Skewness (third central moment)  |
+| [`kurtosis`](https://www.mathworks.com/help/stats/kurtosis.html) | Kurtosis (fourth central moment)  |
+| [`moment`](https://www.mathworks.com/help/stats/moment.html) | Central moment of arbitrary order |
+
+
+
+- the median is less sensitive to outliers than the mean
+
+- the MAD(mean absolute deviation) is:
+
+  ![img](https://gblobscdn.gitbook.com/assets%2F-MW9qnt5mI5Jcz-Mufx8%2F-MWHgHCgX7cfZgVqUUWS%2F-MWHiPEF2SZlmCrxfh0H%2Fimage.png?alt=media&token=d656ab8f-f6c3-4032-91b4-3d05fecd9129)
+
+
+
+## 4.3、Finding Peaks
+
+使用matlab的函式来寻找局部maxima和minima
+
+- [idx, prom] = islocalmin(X, options)
+- idx is logical array
+- prom是取到局部最大（最小）的具体值
+
+![img](https://gblobscdn.gitbook.com/assets%2F-MW9qnt5mI5Jcz-Mufx8%2F-MWHgHCgX7cfZgVqUUWS%2F-MWHnHfByGF6uCmNtie8%2Fimage.png?alt=media&token=78feb647-b133-4da7-a0a8-8841a9a6698d)
+
+通过threshold来去除噪点，因为判断最大最小值，只要看这个点的两边就ok
+
+例如：![img](https://gblobscdn.gitbook.com/assets%2F-MW9qnt5mI5Jcz-Mufx8%2F-MWHgHCgX7cfZgVqUUWS%2F-MWHnyOyENt9Ah2KPIdv%2Fimage.png?alt=media&token=0eb22cfa-60df-48e5-989d-5c3ec63ca7c8)
+
+
+
+## 4.4、Computing Derivatives(计算导数)
+
+用到matlab的函式
+
+- diff(X)	--->  [x2-x1,x3-x2,....]
+- X = standardizeMissing(X, value)   ---> 将value转成NAN
+
+
+
+在本例中，我们通过字母的X轴和Time来计算在书写速率velocity
+
+并用standardizeMissing来去除计算出inf的影响
+
+
+
+## 4.5、Calculating Correlations
